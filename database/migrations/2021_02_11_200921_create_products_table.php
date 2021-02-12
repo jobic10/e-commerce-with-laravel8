@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('slug')->unique();
             $table->double('price');
             $table->string('photo');
-            $table->integer('counter');
-            $table->date('date_view');
+            $table->integer('counter')->default(0);
+            $table->date('date_view')->nullable();
             $table->timestamps();
         });
     }
