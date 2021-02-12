@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     use HasFactory;
+    public function sales()
+    {
+        return $this->belongsToMany(\App\Models\Sale::class, 'transactions', 'ref', 'ref', 'ref', 'ref');
+    }
 }

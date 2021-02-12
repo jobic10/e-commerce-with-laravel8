@@ -19,7 +19,6 @@ class CreateTransactionsTable extends Migration
             $table->float('amount');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('ref')->references('ref')->on('sales')->onDelete('CASCADE');
         });
     }
 
