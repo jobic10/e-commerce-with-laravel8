@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDetailsTable extends Migration
+class AddUserToSalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('details', function (Blueprint $table) {
-            $table->id();
-            $table->integer('quantity');
-            $table->timestamps();
+        Schema::table('sales', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained();
+
         });
     }
 
@@ -27,6 +26,9 @@ class CreateDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('details');
+        Schema::table('sales', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+
+        });
     }
 }
