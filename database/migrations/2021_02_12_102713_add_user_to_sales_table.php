@@ -14,7 +14,7 @@ class AddUserToSalesTable extends Migration
     public function up()
     {
         Schema::table('sales', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->after('id')->constrained();
 
         });
     }

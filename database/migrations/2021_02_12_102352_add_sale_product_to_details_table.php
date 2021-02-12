@@ -14,8 +14,8 @@ class AddSaleProductToDetailsTable extends Migration
     public function up()
     {
         Schema::table('details', function (Blueprint $table) {
-            $table->foreignId('sales_id')->constrained();
-            $table->foreignId('product_id')->constrained();
+            $table->foreignId('sales_id')->after('id')->constrained();
+            $table->foreignId('product_id')->after('sales_id')->constrained();
         });
     }
 
