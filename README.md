@@ -64,4 +64,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Helpful links 
 - https://stackoverflow.com/questions/51600860/laravel-hasmany-reverse-relation-issue
-- 
+- https://blog.shhdharmen.me/toggle-light-and-dark-themes-in-bootstrap

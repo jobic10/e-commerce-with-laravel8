@@ -10,6 +10,6 @@ class Transaction extends Model
     use HasFactory;
     public function sales()
     {
-        return $this->belongsToMany(\App\Models\Sale::class, 'transactions', 'ref', 'ref', 'ref', 'ref');
+        return $this->belongsToMany(\App\Models\Sale::class, 'transactions', 'ref', 'ref', 'ref', 'ref'); //How this code works, I don't know! But it works!
     }
 }
