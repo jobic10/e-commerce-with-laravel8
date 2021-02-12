@@ -27,7 +27,7 @@ class DetailFactory extends Factory
         $product = Product::inRandomOrder()->first();
         return [
             'quantity' => mt_rand(1, 9),
-            'sales_id' => $sale->id,
+            'sale_id' => $sale->id,
             'product_id' => $product->id,
         ];
     }
