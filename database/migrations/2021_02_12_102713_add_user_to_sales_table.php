@@ -14,8 +14,7 @@ class AddUserToSalesTable extends Migration
     public function up()
     {
         Schema::table('sales', function (Blueprint $table) {
-            $table->foreignId('user_id')->after('id')->constrained();
-
+            $table->foreignId('user_id')->after('id')->constrained()->onDelete('CASCADE');
         });
     }
 
@@ -28,7 +27,6 @@ class AddUserToSalesTable extends Migration
     {
         Schema::table('sales', function (Blueprint $table) {
             $table->dropColumn('user_id');
-
         });
     }
 }

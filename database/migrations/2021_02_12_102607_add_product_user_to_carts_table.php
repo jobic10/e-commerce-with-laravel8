@@ -14,8 +14,8 @@ class AddProductUserToCartsTable extends Migration
     public function up()
     {
         Schema::table('carts', function (Blueprint $table) {
-            $table->foreignId('user_id')->after('id')->constrained();
-            $table->foreignId('product_id')->after('user_id')->constrained();
+            $table->foreignId('user_id')->after('id')->constrained()->onDelete('CASCADE');
+            $table->foreignId('product_id')->after('user_id')->constrained()->onDelete('CASCADE');
         });
     }
 
