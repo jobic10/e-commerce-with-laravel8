@@ -15,6 +15,7 @@ class AddUserToSalesTable extends Migration
     {
         Schema::table('sales', function (Blueprint $table) {
             $table->foreignId('user_id')->after('id')->constrained()->onDelete('CASCADE');
+            $table->foreignId('product_id')->after('user_id')->constrained()->onDelete('CASCADE');
         });
     }
 

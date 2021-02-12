@@ -2,20 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Product;
 use App\Models\Sale;
-use App\Models\User;
+use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class SaleFactory extends Factory
+class TransactionFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Sale::class;
+    protected $model = Transaction::class;
 
     /**
      * Define the model's default state.
@@ -24,12 +22,10 @@ class SaleFactory extends Factory
      */
     public function definition()
     {
-        $user = User::inRandomOrder()->first();
-        $product = Product::inRandomOrder()->first();
+        $sale = Sale::inRandomOrder()->first();
         return [
-            'ref' => uniqid(date('dhism')),
-            'user_id' => $user->id,
-            'product_id' => $product->id
+            'ref' => $sale->ref,
+            'amount' => $this->faker->numberBetween(500, 30000),
         ];
     }
 }
