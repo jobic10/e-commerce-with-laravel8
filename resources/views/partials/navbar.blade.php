@@ -42,8 +42,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" id='navbar-search-input'
                                 placeholder="Search for Product">
-                            <div class="input-group-append" style="cursor: pointer"
-                                onclick="$(this).closest('form').submit();">
+                            <div class="input-group-append" onclick="$(this).closest('form').submit();">
                                 <span class="input-group-text" id="searchBtn"><i class="fa fa-search"></i></span>
                             </div>
                         </div>

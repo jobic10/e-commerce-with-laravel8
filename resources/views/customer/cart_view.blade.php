@@ -27,8 +27,38 @@
                             </td>
                             <td>MICROSOFT Surface Pro 4 &amp; Typecover - 128 GB</td>
                             <td>$ 799.00</td>
-                            <td class="input-group">
-                                <span class="input-group-btn">
+
+
+                            <td class="">
+                                {{-- <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <button type="button" id="minus"
+                                                class="btn btn-default btn-sm minus" data-id="5"><i
+                                                    class="fa fa-minus fa-xs"></i></button></span>
+                                    </div>
+                                    <input type="text" class="form-control" value="2" id="qty_5">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"> <button type="button" id="add"
+                                                class="btn btn-default btn-flat  btn-sm  add" data-id="5"><i
+                                                    class="fa fa-plus"></i>
+                                            </button></span>
+                                    </div>
+                                </div> --}}
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+
+                                        <button type="button" id="minus" class="btn btn-outline-primary btn-sm minus"
+                                            data-id="5"><i class="fa fa-minus fa-xs"></i></button>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder=""
+                                        aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                    <div class="input-group-append">
+                                        <button type="button" id="minus" class="btn btn-outline-primary btn-sm minus"
+                                            data-id="5"><i class="fa fa-plus fa-xs"></i></button>
+                                    </div>
+                                </div>
+
+                                {{-- <span class="input-group-btn">
                                     <button type="button" id="minus" class="btn btn-default btn-sm minus" data-id="5"><i
                                             class="fa fa-minus fa-xs"></i></button>
                                 </span>
@@ -37,7 +67,7 @@
                                     <button type="button" id="add" class="btn btn-default btn-flat add" data-id="5"><i
                                             class="fa fa-plus"></i>
                                     </button>
-                                </span>
+                                </span> --}}
                             </td>
                             <td>$ 1,598.00</td>
                         </tr>

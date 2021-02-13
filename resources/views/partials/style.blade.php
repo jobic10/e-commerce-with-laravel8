@@ -34,7 +34,6 @@
     #navbar-search-input:focus {
         outline: 0px !important;
         -webkit-appearance: none;
-        box-shadow: none !important;
     }
 
         {
@@ -118,6 +117,10 @@
 
     .card: {
         padding: 0px;
+    }
+
+    .input-group>input:focus {
+        box-shadow: none;
     }
 
 </style>
