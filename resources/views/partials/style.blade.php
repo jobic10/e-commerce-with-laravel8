@@ -6,19 +6,30 @@
         }
 
         #navbar-search-input:focus {
-            width: 100px;
+            width: 200px;
+            background-color: white;
         }
     }
 
     /* Medium devices (desktops, 992px and up) */
     @media (min-width: 992px) {
         #navbar-search-input {
-            width: 150px;
+            width: 200px;
+            border: none;
         }
 
-        #navbar-search-input:focus {
-            width: 250px;
-        }
+
+
+    }
+
+    #navbar-search-input:focus {
+        outline: 0px !important;
+        -webkit-appearance: none;
+        box-shadow: none !important;
+    }
+
+        {
+        overflow-wrap: break-word;
     }
 
     .word-wrap {
@@ -29,7 +40,7 @@
         height: 300px;
     }
 
-    .box:hover {
+    .card:hover {
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     }
 
@@ -47,7 +58,7 @@
     }
 
     #trending li:before {
-        content: "\f046";
+        content: "#";
         font-family: FontAwesome;
         display: inline-block;
         margin-left: -1.3em;
@@ -60,31 +71,22 @@
         height: 100px;
     }
 
-    .card {
-        box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.26);
-    }
-
-    /* change the background color */
     .navbar-custom {
-        background-color: #007BB6;
+        background-color: #3c8dbc;
+        text-transform: uppercase;
     }
 
-    /* change the brand and text color */
-    .navbar-custom .navbar-brand,
-    .navbar-custom .navbar-text {
-        color: rgba(255, 255, 255, .8);
+    body {
+        font-family: 'Source Sans Pro';
     }
 
-    /* change the link color */
-    .navbar-custom .navbar-nav .nav-link {
-        color: rgba(255, 255, 255, .5);
+    .nav-item:hover {
+        background: rgba(0, 0, 0, 0.1);
+        color: #f6f6f6;
     }
 
-    /* change the color of active or hovered links */
-    .navbar-custom .nav-item.active .nav-link,
-    .navbar-custom .nav-item:focus .nav-link,
-    .navbar-custom .nav-item:hover .nav-link {
-        color: #ffffff;
+    .wrapper {
+        height: 100%;
     }
 
 </style>

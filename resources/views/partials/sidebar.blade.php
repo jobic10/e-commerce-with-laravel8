@@ -24,7 +24,7 @@
 </div>
 
 <div class="row mt-2">
-    <div class="card w-100">
+    <div class="card primary w-100">
         <div class="card-header">
             <b>Subscribe</b>
         </div>
@@ -42,22 +42,17 @@
     </div>
 </div>
 
-<div class="row mt-2">
+<div class="row mt-2" style="margin-bottom: 90px;">
     <div class='card w-100'>
         <div class='card-header'>
             <b>Follow us on Social Media</b>
         </div>
         <div class='card-body'>
-            <a class="btn btn-social-icon  btn-facebook" style="background-color: #3B5998; color:white"><i
-                    class="fa fa-facebook"></i></a>
-            <a class="btn btn-social-icon  btn-twitter" style="background-color: #55ACEE; color:white"><i
-                    class="fa fa-twitter"></i></a>
-            <a class="btn btn-social-icon  btn-instagram" style="background-color: #3F729B; color:white"><i
-                    class="fa fa-instagram"></i></a>
-            <a class="btn btn-social-icon  btn-google" style="background-color: #DD4B39; color:white"><i
-                    class="fa fa-google-plus"></i></a>
-            <a class="btn btn-social-icon  btn-linkedin" style="background-color: #007BB6; color:white"><i
-                    class="fa fa-linkedin"></i></a>
+            <a class="btn btn-social-icon  btn-facebook"><i class="fab fa-facebook text-primary"></i></a>
+            <a class="btn btn-social-icon  btn-twitter"><i class="fab fa-twitter text-primary"></i></a>
+            <a class="btn btn-social-icon  btn-instagram"><i class="fab fa-instagram text-danger"></i></a>
+            <a class="btn btn-social-icon  btn-google"><i class="fab fa-google-plus text-danger"></i></a>
+            <a class="btn btn-social-icon  btn-linkedin"><i class="fab fa-linkedin text-primary"></i></a>
         </div>
     </div>
 </div>

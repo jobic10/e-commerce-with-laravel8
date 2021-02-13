@@ -17,8 +17,12 @@
         integrity="sha512-wzhF4/lKJ2Nc8mKHNzoFP4JZsnTcBOUUBT+lWPcs07mz6lK3NpMH1NKCKDMarjaw8gcYnSBNjjllN4kVbKedbw=="
         crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <!-- Custom CSS -->
     @include('partials.style')
     @yield('custom_css')
@@ -26,15 +30,16 @@
 </head>
 
 <body class="hold-transition skin-blue layout-top-nav">
-    <div class="wrapper">
+    <div class="wrapper" style="background-color:  gainsboro;">
 
         @include('partials.navbar')
         <div class="content-wrapper">
-            <div class="container">
+            <div class="container ">
                 @yield('content')
             </div>
         </div>
     </div>
+    @include('partials.footer')
     @include('partials.scripts')
     @yield('custom_js')
 </body>
