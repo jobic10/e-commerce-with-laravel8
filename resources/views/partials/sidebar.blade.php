@@ -16,9 +16,9 @@
                 }
                 $pdo->close();
                 ?> --}}
-                <li>A</li>
-                <li>B</li>
-                <ul>
+                <li class='hits'>Get free updates on the latest products and discounts, straight to your inbox.</li>
+                <li class='hits'>Lorem ipsum dolor sit amet consectetur adipisicing elit. </li>
+            </ul>
         </div>
     </div>
 </div>
@@ -32,11 +32,12 @@
             <p>Get free updates on the latest products and discounts, straight to your inbox.</p>
             <form method="POST" action="">
                 <div class="input-group">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-info btn-flat"><i class="fa fa-envelope"></i> </button>
-                    </span>
+                    <input type="email" class="form-control" name='email' placeholder="Enter mail">
+                    <div class="input-group-append" style="cursor: pointer" onclick="$(this).closest('form').submit();">
+                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                    </div>
                 </div>
+
             </form>
         </div>
     </div>

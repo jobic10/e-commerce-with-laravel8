@@ -17,6 +17,7 @@
 
     /* Medium devices (desktops, 992px and up) */
     @media (min-width: 992px) {
+
         #navbar-search-input {
             width: 200px;
             border: none;
@@ -61,16 +62,21 @@
         padding: 10px 5px 10px 15px;
     }
 
-    #trending li {
-        padding-left: 1.3em;
+
+    .hits:before {
+        margin-left: -1.3em;
+        font-family: "Font Awesome 5 Free";
+        content: "\f058";
+        display: inline-block;
+        padding-right: 5px;
+        vertical-align: middle;
+        font-weight: 900;
+        color: #3c8dbc;
     }
 
-    #trending li:before {
-        content: "#";
-        font-family: FontAwesome;
-        display: inline-block;
+    .hits {
+        padding-left: 1.3em;
         margin-left: -1.3em;
-        width: 1.3em;
     }
 
     /*Magnify*/
