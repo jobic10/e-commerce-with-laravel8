@@ -29,21 +29,7 @@
                             <td>$ 799.00</td>
 
 
-                            <td class="">
-                                {{-- <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"> <button type="button" id="minus"
-                                                class="btn btn-default btn-sm minus" data-id="5"><i
-                                                    class="fa fa-minus fa-xs"></i></button></span>
-                                    </div>
-                                    <input type="text" class="form-control" value="2" id="qty_5">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"> <button type="button" id="add"
-                                                class="btn btn-default btn-flat  btn-sm  add" data-id="5"><i
-                                                    class="fa fa-plus"></i>
-                                            </button></span>
-                                    </div>
-                                </div> --}}
+                            <td>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
 
@@ -57,17 +43,6 @@
                                             data-id="5"><i class="fa fa-plus fa-xs"></i></button>
                                     </div>
                                 </div>
-
-                                {{-- <span class="input-group-btn">
-                                    <button type="button" id="minus" class="btn btn-default btn-sm minus" data-id="5"><i
-                                            class="fa fa-minus fa-xs"></i></button>
-                                </span>
-                                <input type="text" class="form-control" value="2" id="qty_5">
-                                <span class="input-group-btn">
-                                    <button type="button" id="add" class="btn btn-default btn-flat add" data-id="5"><i
-                                            class="fa fa-plus"></i>
-                                    </button>
-                                </span> --}}
                             </td>
                             <td>$ 1,598.00</td>
                         </tr>
