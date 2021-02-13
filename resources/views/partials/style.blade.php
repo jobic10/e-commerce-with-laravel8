@@ -116,4 +116,8 @@
         margin-top: -5px;
     }
 
+    .card: {
+        padding: 0px;
+    }
+
 </style>

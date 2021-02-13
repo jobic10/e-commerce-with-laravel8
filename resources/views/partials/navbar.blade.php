@@ -120,7 +120,7 @@
                                 LOGIN
                             </a>
                         </li>
-                        <a href="#register" role="button" class="nav-link text-white" data-toggle="modal">
+                        <a href="#registerModal" role="button" class="nav-link text-white" data-toggle="modal">
                             REGISTER
                         </a>
                         <?php
@@ -131,6 +131,9 @@
         </div>
     </nav>
 </header>
+<?php
+//login modal begin here
+?>
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -143,18 +146,58 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Recipient:</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <label for="recipient-name" class="col-form-label">Username:</label>
+                        <input type="text" class="form-control" id="recipient-name" placeholder="Enter your username"
+                            required>
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="col-form-label">Message:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
+                        <label for="message-text" class="col-form-label">Password:</label>
+                        <input type="password" class="form-control" id="message-text" placeholder="Enter your password"
+                            required />
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
+                <button type="button" class="btn btn-primary">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+//register modal
+?>
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModal"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModal">Sign up</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Username:</label>
+                        <input type="text" class="form-control" id="recipient-name" placeholder="Enter fullname"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Password:</label>
+                        <input type="password" class="form-control" id="message-text"
+                            placeholder="Enter desired password" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Email:</label>
+                        <input type="text" class="form-control" id="recipient-name" placeholder="Enter Email" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Sign up</button>
             </div>
         </div>
     </div>

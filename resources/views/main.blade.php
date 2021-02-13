@@ -34,8 +34,16 @@
 
         @include('partials.navbar')
         <div class="content-wrapper">
+
             <div class="container ">
-                @yield('content')
+                <section class="content">
+                    <div class="row">
+                        @yield('content')
+                        <div class="col-sm-3">
+                            @include('partials.sidebar')
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
