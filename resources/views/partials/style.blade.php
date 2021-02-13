@@ -9,6 +9,10 @@
             width: 200px;
             background-color: white;
         }
+
+        .dropdown-menu {
+            background-color: whitesmoke;
+        }
     }
 
     /* Medium devices (desktops, 992px and up) */
@@ -17,6 +21,10 @@
             width: 200px;
             border: none;
         }
+
+
+
+
 
 
 
@@ -87,6 +95,19 @@
 
     .wrapper {
         height: 100%;
+    }
+
+    .dropdown-item:focus,
+    .dropdown-item:hover {
+
+        background-color: #e1e3e9;
+        color: #333;
+    }
+
+
+    .dropdown-menu>a {
+        color: #777;
+        margin-top: -5px;
     }
 
 </style>

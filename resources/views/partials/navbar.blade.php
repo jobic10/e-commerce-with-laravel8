@@ -2,14 +2,16 @@
     <nav class="navbar navbar-expand-lg navbar-light mb-4 navbar-custom">
         <div class="container">
             <div class="navbar-header">
+                <a href="#" class="navbar-brand text-white"><b>E</b> - Commerce</a>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon text-white"></span>
                 </button>
             </div>
-            <div class="collapse navbar-collapse  float-left" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse  " id="navbarSupportedContent">
+                <ul class="nav nav-pill mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link text-white" href="#">Home</a>
                     </li>
@@ -28,12 +30,12 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu" style='background-color:white-smoke;'
+                            aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Laptop</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something</a>
                         </div>
+
                     </li>
 
                     <form method="POST" class="navbar-form navbar-left" id='searchForm' action="">
