@@ -13,23 +13,29 @@
                     </div>
                     <div class="col-sm-9">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <h6>Name:</h6>
-                                <h6>Email:</h6>
-                                <h6>Contact Info:</h6>
-                                <h6>Address:</h6>
-                                <h6>Member Since:</h6>
-                            </div>
-                            <div class="col-sm-9">
-                                <h6>Cole Richard <span class="pull-right mr-4 mt-2" style="float: right;">
-                                        <a href="#edit" class="btn btn-success btn-flat btn-sm" data-toggle="modal"><i
-                                                class="fa fa-edit"></i> Edit</a>
-                                    </span>
-                                </h6>
-                                <h6>nuwinyquv@mailinator.com</h6>
-                                <h6>N/a</h6>
-                                <h6>N/a</h6>
-                                <h6>Feb 13, 2021</h6>
+                            <div class="col-sm-12 table-responsive">
+                                <table class="table table-sm table-bordered table-striped">
+                                    <tr>
+                                        <th>Name</th>
+                                        <td>Owonubi Job Sunday</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email || Phone</th>
+                                        <td>jobowonubi@gmail.com || 08100134741</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address</th>
+                                        <td>UNILORIN</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Member Since</th>
+                                        <td>Feb, 14 2021</td>
+                                    </tr>
+                                </table>
+                                <span class="pull-right mr-4 mt-2" style="float: right;">
+                                    <a href="#change_password" class="btn btn-success btn-flat btn-sm"
+                                        data-toggle="modal"><i class="fa fa-edit"></i> Update Password</a>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -71,6 +77,77 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+    {{-- MODAL --}}
+    <!-- Transaction History -->
+    <div class="modal fade" id="transaction">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><b>Transaction Full Details</b></h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Date: <span id="date"></span>
+                        <span class="pull-right">Transaction#: <span id="transid"></span></span>
+                    </p>
+                    <table class="table table-bordered">
+                        <thead>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                        </thead>
+                        <tbody id="detail">
+                            <tr>
+                                <td colspan="3" align="right"><b>Total</b></td>
+                                <td><span id="total"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i
+                            class="fa fa-close"></i> Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile -->
+    <div class="modal fade" id="change_password" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Change Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="old_password" class="col-form-label">Old Password:</label>
+                            <input type="password" class="form-control" id="old_password" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="new_password" class="col-form-label">New Password:</label>
+                            <input type="password" class="form-control" id="new_password" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_new_password" class="col-form-label">Confirm New Password:</label>
+                            <input type="password" class="form-control" id="confirm_new_password" required />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-info">Update Profile</button>
+                    </div>
+            </div>
+            </form>
         </div>
     </div>
 @endsection
