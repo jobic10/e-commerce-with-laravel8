@@ -41,7 +41,7 @@
                 Transactions
             </div>
             <div class="card-body table-responsive">
-                <table class="table table-bordered" id="example1">
+                <table class="table table-striped table-bordered" id="table1">
                     <thead>
                         <th class="hidden"></th>
                         <th>Date</th>
@@ -59,18 +59,29 @@
                             <td><button class='btn btn-sm btn-flat btn-info ' data-id='11'><i class='fa fa-search'></i>
                                     View</button></td>
                         </tr>
-
-                        <tr>
+                        <?php for ($i = 0; $i < 50; $i++) { ?> <tr>
                             <td class='hidden'></td>
                             <td>Feb 13, 2021</td>
-                            <td>i9j30jmip</td>
+                            <td><?php echo Str::random(40); ?></td>
                             <td>&#36; 0.00</td>
                             <td><button class='btn btn-sm btn-flat btn-info ' data-id='12'><i class='fa fa-search'></i>
                                     View</button></td>
-                        </tr>
+                            </tr>
+                            <?php } ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+@endsection
+
+@section('custom_js')
+    <script>
+        $(document).ready(function() {
+
+            $('#table1').DataTable();
+
+        })
+
+    </script>
 @endsection
