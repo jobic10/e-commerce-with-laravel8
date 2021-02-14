@@ -50,4 +50,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\Cart::class);
     }
+    public function contact()
+    {
+        return $this->hasOne(\App\Models\Contact::class);
+    }
 }
