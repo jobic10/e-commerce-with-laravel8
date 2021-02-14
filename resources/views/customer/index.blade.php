@@ -1,4 +1,4 @@
-@extends('main')
+@extends('customer.main')
 @section('content')
     <div class="col-sm-9">
         <?php if (isset($_SESSION['error'])) {

@@ -25,7 +25,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <!-- Custom CSS -->
-    @include('partials.style')
+    @include('customer.partials.style')
     @yield('custom_css')
 
 </head>
@@ -33,7 +33,7 @@
 <body class="hold-transition skin-blue layout-top-nav">
     <div class="wrapper" style="background-color:  gainsboro;">
 
-        @include('partials.navbar')
+        @include('customer.partials.navbar')
         <div class="content-wrapper">
 
             <div class="container ">
@@ -41,15 +41,15 @@
                     <div class="row">
                         @yield('content')
                         <div class="col-sm-3">
-                            @include('partials.sidebar')
+                            @include('customer.partials.sidebar')
                         </div>
                     </div>
                 </section>
             </div>
         </div>
-        @include('partials.footer')
+        @include('customer.partials.footer')
     </div>
-    @include('partials.scripts')
+    @include('customer.partials.scripts')
     @yield('custom_js')
 
 </body>
