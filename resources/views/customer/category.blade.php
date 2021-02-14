@@ -16,7 +16,7 @@
                             <h5><a href='{{ route('getProduct', $product->id) }}'>{{ $product->name }}</a></h5>
                         </div>
                         <div class='card-footer'>
-                            <b>&#836; {{ number_format($product->price, 2) }}</b>
+                            <b>&#8358; {{ number_format($product->price, 2) }}</b>
                         </div>
                     </div>
                 </div>

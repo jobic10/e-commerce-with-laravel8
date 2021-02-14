@@ -26,6 +26,15 @@ class PageController extends Controller
     public function getProduct($id)
     {
         $product = Product::findOrFail($id);
+        //page view
+        $now = date('Y-m-d');
+        if ($product->date_view == $now) {
+            $product->counter++;
+        } else {
+            $product->counter = 1;
+            $product->date_view = $now;
+        }
+        $product->save();
         return view('customer.product', ['product' => $product]);
     }
 }

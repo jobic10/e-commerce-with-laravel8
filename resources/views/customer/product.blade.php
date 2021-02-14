@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-sm-6">
                     <h1 class="page-header">{{ $product->name }}</h1>
-                    <h3><b>&#36; {{ number_format($product->price) }}</b></h3>
+                    <h3><b>&#8358; {{ number_format($product->price) }}</b></h3>
                     <p><b>Category:</b> <a
                             href="{{ route('category', $product->category->id) }}">{{ $product->category->name }}</a>
                     </p>
