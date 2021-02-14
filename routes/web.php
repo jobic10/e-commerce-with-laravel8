@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // return view('customer.index');
-    return view('admin.index');
-});
+Route::get('/', [PageController::class, 'index'])->name('homepage');
+Route::get('/category/{id}', [PageController::class, 'getProductsByCategory'])->name('category');
+Route::get('/product/{id}', [PageController::class, 'getProduct'])->name('getProduct');

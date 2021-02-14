@@ -86,7 +86,7 @@
 
     .navbar-custom {
         background-color: #3c8dbc;
-        text-transform: uppercase;
+        text-transform: capitalize;
     }
 
     body {

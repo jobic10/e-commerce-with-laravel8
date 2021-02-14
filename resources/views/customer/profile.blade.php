@@ -1,4 +1,4 @@
-@extends('main')
+@extends('customer.main')
 @section('content')
     <div class="col-sm-9">
         <div class="font-weight-bold mb-3">

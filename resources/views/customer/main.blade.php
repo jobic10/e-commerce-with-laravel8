@@ -33,7 +33,8 @@
 <body class="hold-transition skin-blue layout-top-nav">
     <div class="wrapper" style="background-color:  gainsboro;">
 
-        @include('customer.partials.navbar')
+        {{-- @include('customer.partials.navbar') --}}
+        <x-customer-navbar />
         <div class="content-wrapper">
 
             <div class="container ">

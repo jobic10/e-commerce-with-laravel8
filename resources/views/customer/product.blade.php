@@ -1,11 +1,6 @@
-@extends('main')
+@extends('customer.main')
 @section('content')
     <div class="col-sm-9">
-        <div class="font-weight-bold mb-3">
-
-            Category (E.g. Laptop)
-        </div>
-
         <div class='row'>
             <div class="callout" id="callout" style="display:none">
                 <button type="button" class="close"><span aria-hidden="true">&times;</span></button>
@@ -37,14 +32,14 @@
                     </form>
                 </div>
                 <div class="col-sm-6">
-                    <h1 class="page-header">DELL Inspiron 15 7000 15.6</h1>
-                    <h3><b>&#36; 899.00</b></h3>
-                    <p><b>Category:</b> <a href="category.php?category=laptops">Laptops</a></p>
+                    <h1 class="page-header">{{ $product->name }}</h1>
+                    <h3><b>&#36; {{ number_format($product->price) }}</b></h3>
+                    <p><b>Category:</b> <a
+                            href="{{ route('category', $product->category->id) }}">{{ $product->category->name }}</a>
+                    </p>
                     <p><b>Description:</b></p>
                     <p>
-                    <p>15-inch laptop ideal for gamers. Featuring the latest Intel&reg; processors for superior gaming
-                        performance, and life-like NVIDIA&reg; GeForce&reg; graphics and an advanced thermal cooling design.
-                    </p>
+                    <p>{{ $product->description }}</p>
                     </p>
                 </div>
             </div>
