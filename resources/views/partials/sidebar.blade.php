@@ -50,8 +50,8 @@
         </div>
         <div class='card-body'>
             <a class="btn btn-social-icon  btn-facebook"><i class="fab fa-facebook text-primary"></i></a>
-            <a class="btn btn-social-icon  btn-twitter"><i class="fab fa-twitter text-primary"></i></a>
-            <a class="btn btn-social-icon  btn-instagram"><i class="fab fa-instagram text-danger"></i></a>
+            <a class="btn btn-social-icon  btn-twitter"><i class="fab fa-twitter text-info"></i></a>
+            <a class="btn btn-social-icon  btn-instagram"><i class="fab fa-instagram text-warning"></i></a>
             <a class="btn btn-social-icon  btn-google"><i class="fab fa-google-plus text-danger"></i></a>
             <a class="btn btn-social-icon  btn-linkedin"><i class="fab fa-linkedin text-primary"></i></a>
         </div>
