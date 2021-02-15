@@ -43,9 +43,10 @@
 
                         </li>
 
-                        <form method="POST" class="navbar-form navbar-left" id='searchForm' action="">
+                        <form class="navbar-form navbar-left" id='searchForm'
+                            action="{{ route('searchForProduct') }}">
                             <div class="input-group">
-                                <input type="text" class="form-control" id='navbar-search-input'
+                                <input type="text" name='search' class="form-control" id='navbar-search-input'
                                     placeholder="Search for Product">
                                 <div class="input-group-append" onclick="$(this).closest('form').submit();">
                                     <span class="input-group-text" id="searchBtn"><i class="fa fa-search"></i></span>

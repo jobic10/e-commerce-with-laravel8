@@ -42,7 +42,8 @@
                     <div class="row">
                         @yield('content')
                         <div class="col-sm-3">
-                            @include('customer.partials.sidebar')
+                            {{-- @include('customer.partials.sidebar') --}}
+                            <x-customer-sidebar />
                         </div>
                     </div>
                 </section>

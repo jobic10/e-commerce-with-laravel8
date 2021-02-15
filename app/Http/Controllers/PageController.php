@@ -37,4 +37,16 @@ class PageController extends Controller
         $product->save();
         return view('customer.product', ['product' => $product]);
     }
+
+    public function searchForProduct(Request $request)
+    {
+        $search = $request->search;
+        // dd($request);
+        if (empty($search)) abort(404);
+        $searchResults = Product::where('name', 'LIKE', "%$search%")->paginate(6);
+        return view('customer.search', [
+            'products' => $searchResults,
+            'name' => $search
+        ]);
+    }
 }
