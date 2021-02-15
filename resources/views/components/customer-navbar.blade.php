@@ -3,7 +3,7 @@
         <nav class="navbar navbar-expand-lg navbar-light mb-4 navbar-custom">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="#" class="navbar-brand text-white"><b>E</b> - Commerce</a>
+                    <a href="#" class="navbar-brand text-white"><b>Your</b> Company</a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -14,7 +14,7 @@
                 <div class="collapse navbar-collapse  " id="navbarSupportedContent">
                     <ul class="nav nav-pill mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link text-white" href="#">Home</a>
+                            <a class="nav-link text-white" href="{{ route('homepage') }}">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">About</a>
@@ -48,8 +48,9 @@
                             <div class="input-group">
                                 <input type="text" name='search' class="form-control" id='navbar-search-input'
                                     placeholder="Search for Product">
-                                <div class="input-group-append" onclick="$(this).closest('form').submit();">
-                                    <span class="input-group-text" id="searchBtn"><i class="fa fa-search"></i></span>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-dark  btn-sm "><i
+                                            class="fa fa-search fa-xs"></i></button>
                                 </div>
                             </div>
                         </form>

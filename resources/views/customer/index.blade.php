@@ -1,16 +1,6 @@
 @extends('customer.main')
 @section('content')
     <div class="col-sm-9">
-        <?php if (isset($_SESSION['error'])) {
-        echo "
-        <div class='alert alert-danger'>
-            " .
-            $_SESSION['error'] .
-            "
-        </div>
-        ";
-        unset($_SESSION['error']);
-        } ?>
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -19,13 +9,13 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ asset('images/banner1.png') }}" class="d-block w-100" alt="First slide">
+                    <img src="https://picsum.photos/1559/510" class="d-block w-100" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ asset('images/banner2.png') }}" class="d-block w-100" alt="Second slide">
+                    <img src="https://via.placeholder.com/1559x510" class="d-block w-100" alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ asset('images/banner3.png') }}" class="d-block w-100" alt="Third slide">
+                    <img src="https://picsum.photos/1559/510" class="d-block w-100" alt="Third slide">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carousel-example-generic" role="button" data-slide="prev">
