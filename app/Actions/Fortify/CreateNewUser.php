@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -30,12 +31,33 @@ class CreateNewUser implements CreatesNewUsers
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
+            'phone' => 'max:11|required',
+            'address' => 'required'
         ])->validate();
 
-        return User::create([
+        $role = Role::firstOrCreate(['name' => 'Customer']);
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+        $response = [
+            'title' => 'Welcome',
+            'msg' => 'We are glad to have you on board!',
+            'type' => 'success'
+        ];
+        session()->flash('status', $response);
+        try {
+            $user->roles()->attach($role->id);
+            //code...
+        } catch (\Throwable $th) {
+            echo "Wahala";
+            // print_r(get_class_methods($user));
+            $user->delete();
+            dd($th);
+        } finally {
+            dd($user);
+        }
+        return $user;
     }
 }

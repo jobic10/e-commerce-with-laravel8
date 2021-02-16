@@ -54,4 +54,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(\App\Models\Contact::class);
     }
+    public function roles()
+    {
+        return $this->belongsToMany(\App\Models\Role::class);
+    }
 }
