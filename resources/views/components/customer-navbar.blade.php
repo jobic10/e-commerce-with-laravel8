@@ -71,102 +71,43 @@
                             </li>
 
 
-                            <?php if (isset($_SESSION['user'])) {
-                            $image = !empty($user['photo']) ? 'images/' . $user['photo'] : 'images/profile.jpg';
-                            echo '
-                            <li class="dropdown user user-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="' .
-                                    $image .
-                                    '" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">' .
-                                        $user['firstname'] .
-                                        ' ' .
-                                        $user['lastname'] .
-                                        '</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <!-- User image -->
-                                    <li class="user-header">
-                                        <img src="' .
-                                    $image .
-                                    '" class="img-circle" alt="User Image">
+                            @if (Auth::user())
+                                <li class="dropdown nav-link user user-menu">
+                                    <a href="#" class="dropdown-toggle text-white" data-toggle="dropdown">
 
-                                        <p>
-                                            ' .
-                                            $user['firstname'] .
-                                            ' ' .
-                                            $user['lastname'] .
-                                            '
-                                            <small>Member since ' .
-                                                date('M. Y', strtotime($user['created_on'])) .
-                                                '</small>
-                                        </p>
-                                    </li>
-                                    <li class="user-footer">
-                                        <div class="pull-left">
-                                            <a href="profile.php" class="btn btn-default btn-flat">Profile</a>
-                                        </div>
-                                        <div class="pull-right">
-                                            <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            ';
-                            } else {
-                            ?>
-                            <li class="nav-item">
-                                <a href="#loginModal" role="button" class="nav-link text-white" data-toggle="modal">
-                                    Login
-                                </a>
-                            </li>
-                            @if (Route::has('register'))
+                                        {{ Auth::user()->name }}
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <!-- User image -->
+                                        <li class="user-footer">
+                                            <div class="pull-left">
+                                                <a href="profile.php" class="btn btn-default btn-flat">Profile</a>
+                                            </div>
+                                            <div class="pull-right">
+                                                <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @else
                                 <li class="nav-item">
-                                    <a href="#registerModal" role="button" class="nav-link text-white"
-                                        data-toggle="modal">
-                                        Register
+                                    <a href="#loginModal" role="button" class="nav-link text-white" data-toggle="modal">
+                                        Login
                                     </a>
                                 </li>
-                            @endif
-                            <?php
-                            } ?>
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a href="#registerModal" role="button" class="nav-link text-white"
+                                            data-toggle="modal">
+                                            Register
+                                        </a>
+                                    </li>
+                                @endif
                         </ul>
+                        @endif
                     </div>
                 </div>
             </div>
         </nav>
     </header>
-    <?php
-    //login modal begin here
-    ?>
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModal">New message</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Username:</label>
-                            <input type="text" class="form-control" id="recipient-name"
-                                placeholder="Enter your username" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label">Password:</label>
-                            <input type="password" class="form-control" id="message-text"
-                                placeholder="Enter your password" required />
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Login</button>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>

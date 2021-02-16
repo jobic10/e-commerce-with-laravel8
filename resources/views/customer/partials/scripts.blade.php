@@ -44,7 +44,7 @@
     $(function() {
 
         @if (Session::has('status'))
-        swal("{{ session(status . title) }}", "{{ session(status . msg) }}","{{ session(status . type) }}");
+        swal("{{ session('status . title') }}", "{{ session('status . msg') }}","{{ session('status . type') }}");
         @endif
 
         $('.zoom').magnify();
