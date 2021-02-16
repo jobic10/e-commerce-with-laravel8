@@ -27,8 +27,8 @@ class AddSaleProductToDetailsTable extends Migration
     public function down()
     {
         Schema::table('details', function (Blueprint $table) {
-            $table->dropColumn('sale_id');
-            $table->dropColumn('product_id');
+            $table->dropForeign(['sale_id']);
+            $table->dropForeign(['product_id']);
         });
     }
 }

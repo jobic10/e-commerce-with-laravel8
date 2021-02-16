@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->string('slug')->unique();
             $table->double('price');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->integer('counter')->default(0);
             $table->date('date_view')->nullable();
             $table->timestamps();

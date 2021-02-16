@@ -27,8 +27,8 @@ class AddProductUserToCartsTable extends Migration
     public function down()
     {
         Schema::table('carts', function (Blueprint $table) {
-            $table->dropColumn('user_id');
-            $table->dropColumn('product_id');
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['product_id']);
         });
     }
 }

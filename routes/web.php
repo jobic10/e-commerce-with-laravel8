@@ -19,3 +19,5 @@ Route::get('/', [PageController::class, 'index'])->name('homepage');
 Route::get('/category/{id}', [PageController::class, 'getProductsByCategory'])->name('category');
 Route::get('/product/{id}', [PageController::class, 'getProduct'])->name('getProduct');
 Route::get('/search', [PageController::class, 'searchForProduct'])->name('searchForProduct');
+Route::post('/add-cart', [PageController::class, 'addToCart'])->name('addToCart');
+Route::get('/get-cart', [PageController::class, 'getCart'])->name('getCart');

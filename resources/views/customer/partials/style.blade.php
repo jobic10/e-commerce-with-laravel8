@@ -131,4 +131,8 @@
         border-bottom-left-radius: 0px;
     }
 
+    .zoom {
+        width: 100%;
+    }
+
 </style>
