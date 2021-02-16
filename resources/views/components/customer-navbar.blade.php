@@ -79,14 +79,19 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <!-- User image -->
-                                        <li class="user-footer">
-                                            <div class="pull-left">
-                                                <a href="profile.php" class="btn btn-default btn-flat">Profile</a>
-                                            </div>
-                                            <div class="pull-right">
-                                                <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
-                                            </div>
+                                        <li class="nav-link">
+                                            Profile
                                         </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"
+                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                            <form id='logout-form' style="display: none"
+                                                action="{{ route('logout') }}" method="POST">
+                                                @csrf
+                                            </form>
+                                        </li>
+
                                     </ul>
                                 </li>
                             @else

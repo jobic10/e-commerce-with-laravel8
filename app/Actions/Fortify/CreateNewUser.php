@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Contact;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -35,7 +36,9 @@ class CreateNewUser implements CreatesNewUsers
             'address' => 'required'
         ])->validate();
 
+        // dd($input);
         $role = Role::firstOrCreate(['name' => 'Customer']);
+
         $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
@@ -47,6 +50,11 @@ class CreateNewUser implements CreatesNewUsers
             'msg' => 'We are glad to have you on board!',
             'type' => 'success'
         ];
+        $contact = new Contact();
+        $contact->phone = $input['phone'];
+        $contact->address = $input['address'];
+        $contact->user_id = $user->id;
+        $contact->save();
         session()->flash('status', $response);
 
         return $user;
