@@ -37,7 +37,6 @@
                                     <a class="dropdown-item"
                                         href="{{ route('category', $category->id) }}">{{ $category->name }}</a>
                                 @endforeach
-                                <a class="dropdown-item" href="#">Laptop</a>
 
                             </div>
 
@@ -61,17 +60,13 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle  text-white" href="#" id="navbarDropdown"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-shopping-cart   text-white"></i> <span
-                                        class="label label-success cart_count"></span>
+                                    <i class="fa fa-shopping-cart   text-white"></i> <sup><span
+                                            class="badge badge-success count"></sup></span>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li class="header ">You have <span class="cart_count"></span> item(s) in cart
+                                <ul id="cart_menu" class="dropdown-menu" style='background-color:white-smoke;'>
+                                    <li class="header ">You have <span class="cart_count"></span> in cart
                                     </li>
-                                    <li class="nav-item">
-                                        <ul class="menu" id="cart_menu">
-                                        </ul>
-                                    </li>
-                                    <li class="footer"><a href="cart_view.php">Go to Cart</a></li>
+                                    <a href="cart_view.php">Go to Cart</a>
                                 </ul>
                             </li>
 

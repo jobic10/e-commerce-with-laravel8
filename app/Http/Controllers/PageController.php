@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class PageController extends Controller
 {
@@ -48,5 +51,97 @@ class PageController extends Controller
             'products' => $searchResults,
             'name' => $search
         ]);
+    }
+    public function addToCart(Request $request)
+    {
+
+
+        $product = Product::find($request->product_id);
+        $quantity = $request->quantity;
+        if (!$product || $quantity < 1) return response()->json([
+            'msg' => 'Product not found or invalid quantity specified!',
+            'type' => 'error',
+        ]);
+
+        if (Auth::user()) {
+            $check = Cart::firstOrCreate(['user_id' => Auth::id(), 'product_id' => $product->id]);
+            if ($check->wasRecentlyCreated) {
+                $check->quantity = $quantity;
+                $check->save();
+                return response()->json([
+                    'msg' => 'Product added to cart!',
+                    'type' => 'success',
+                ]);
+            } else return response()->json([
+                'msg' => 'Product already in cart',
+                'type' => 'info'
+            ]);
+        } else {
+            if (!Session::has('cart')) {
+                session('cart', array());
+            }
+            $exist = array();
+            if (session('cart'))
+                foreach (session('cart') as $row) {
+                    array_push($exist, $row['productid']);
+                }
+            if (in_array($product->id, $exist)) {
+                return response()->json([
+                    'msg' => 'Product already in cart!',
+                    'type' => 'info',
+                ]);
+            } else {
+                $data = array();
+                $data['productid'] = $product->id;
+                $data['quantity'] = $quantity;
+
+                $request->session()->push('cart', $data);
+                return response()->json([
+                    'msg' => 'Product added to cart!',
+                    'type' => 'success',
+                ]);
+            }
+        }
+    }
+    public function getCart()
+    {
+
+        $output = array('list' => '', 'count' => 0);
+
+        if (Auth::user()) {
+            $carts = Cart::where('user_id', Auth::id())->get();
+            foreach ($carts as $cart) {
+                $output['count']++;
+                $productname = (strlen($cart->product->name) > 30) ? substr_replace($cart->product->name, '...', 27) : $cart->product->name;
+                $output['list'] .= "
+                <li class='dropdown-item'>
+                                   " . $productname . " &times; " . $cart->quantity . "
+                        </li>
+                    ";
+            }
+        } else {
+            if (!Session::has('cart')) {
+                session('cart', array());
+            }
+
+            if (count(session('cart')) < 1) {
+                $output['count'] = 0;
+            } else {
+                foreach (session('cart') as $row) {
+                    $product = Product::find($row['productid']);
+                    if (!$product) continue;
+                    $output['count']++;
+
+                    $output['list'] .= "
+                        <li class='dropdown-item'>
+                                   " . $product->name . " &times; " . $row['quantity'] . "
+                        </li>
+                    ";
+                }
+            }
+        }
+
+        $output['list'] .= '<a href="cart_view.php">Go to Cart</a>';
+        echo json_encode($output);
     }
 }
