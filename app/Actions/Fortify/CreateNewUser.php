@@ -45,18 +45,18 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
             'role_id' => $role->id
         ]);
-        $response = [
-            'title' => 'Welcome',
-            'msg' => 'We are glad to have you on board!',
-            'type' => 'success'
-        ];
+
         $contact = new Contact();
         $contact->phone = $input['phone'];
         $contact->address = $input['address'];
         $contact->user_id = $user->id;
         $contact->save();
+        $response = [
+            'title' => 'Welcome',
+            'msg' => 'We are glad to have you on board!',
+            'type' => 'success'
+        ];
         session()->flash('status', $response);
-
         return $user;
     }
 }
