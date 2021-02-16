@@ -47,17 +47,7 @@ class CreateNewUser implements CreatesNewUsers
             'type' => 'success'
         ];
         session()->flash('status', $response);
-        try {
-            $user->roles()->attach($role->id);
-            //code...
-        } catch (\Throwable $th) {
-            echo "Wahala";
-            // print_r(get_class_methods($user));
-            $user->delete();
-            dd($th);
-        } finally {
-            dd($user);
-        }
+
         return $user;
     }
 }
