@@ -6,6 +6,9 @@ use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Sale;
+use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use stdClass;
@@ -240,7 +243,6 @@ class PageController extends Controller
     public function verifyPayment(Request $request)
     {
         $reference = $request->reference;
-        echo $reference;
         $pay = curl_init();
         $json_amount = json_decode($this->getCartTotal()->getContent());
         $json_amount = str_replace(",", "", $json_amount);
@@ -267,6 +269,7 @@ class PageController extends Controller
                 'msg' => 'We are deeply sorry. Please try making payment again!'
             ]);
         }
+        // dd($response);
         if ($response) {
             $result = json_decode($response, true);
 
@@ -275,6 +278,30 @@ class PageController extends Controller
                 $reference = strtoupper($reference);
                 //Insert into transaction
                 //Move cart to transaction
+                //User might not be online. Use the email of the payer and get the id
+                $payer_email = ($result['data']['customer']['email']);
+                $amount = $result['data']['requested_amount'] / 100;
+                $user = User::where('email', $payer_email)->firstOrFail();
+                $transaction = Transaction::create([
+                    'ref' => $reference,
+                    'user_id' => $user->id,
+                    'amount' => $amount
+                ]);
+                $carts = Cart::where('user_id', $user->id)->get();
+                foreach ($carts as $cart) {
+                    Sale::create([
+                        'user_id' => $user->id,
+                        'product_id' => $cart->product->id,
+                        'quantity' => $cart->quantity,
+                        'transaction_id' => $transaction->id
+                    ]);
+                    $cart->delete();
+                }
+                return redirect(route('viewProfile'))->with('status', [
+                    'title' => 'Thank you ✅',
+                    'type' => 'success',
+                    'msg' => 'Payment Successful!'
+                ]);
             } else {
                 return redirect(route('previewCart'))->with('status', [
                     'title' => 'Payment not valid',
@@ -311,5 +338,9 @@ class PageController extends Controller
             'type' => 'success',
             'msg' => 'Product has been removed from cart'
         ];
+    }
+    public function viewProfile()
+    {
+        return view('customer.profile');
     }
 }

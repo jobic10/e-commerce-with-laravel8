@@ -67,6 +67,9 @@
                 var qty = $('#qty_' + id).val();
                 if (qty > 1) {
                     qty--;
+                } else {
+                    swal('Denied', 'Minimum quantity reached', 'warning');
+                    return;
                 }
                 $('#qty_' + id).val(qty);
                 $.ajax({

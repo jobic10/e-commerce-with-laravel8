@@ -28,3 +28,4 @@ Route::get('cart/total', [PageController::class, 'getCartTotal'])->name('getCart
 Route::get('cart/payment', [PageController::class, 'initPayment'])->name('initPayment');
 Route::get('cart/verify-payment', [PageController::class, 'verifyPayment'])->name('verifyPayment');
 Route::delete('cart/delete', [PageController::class, 'deleteCart'])->name('deleteCart');
+Route::get('profile/', [PageController::class, 'viewProfile'])->name('viewProfile');

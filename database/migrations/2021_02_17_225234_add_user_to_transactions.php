@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSalesTable extends Migration
+class AddUserToTransactions extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateSalesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sales', function (Blueprint $table) {
-            $table->id();
-            $table->integer('quantity');
-            $table->timestamps();
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->foreignId('user_id')->after('id')->constrained()->onDelete('CASCADE');
         });
     }
 
@@ -27,6 +25,8 @@ class CreateSalesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales');
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
     }
 }
