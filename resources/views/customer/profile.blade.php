@@ -17,19 +17,19 @@
                                 <table class="table table-sm table-bordered table-striped">
                                     <tr>
                                         <th>Name</th>
-                                        <td>Owonubi Job Sunday</td>
+                                        <td>{{ Auth::user()->name }}</td>
                                     </tr>
                                     <tr>
                                         <th>Email || Phone</th>
-                                        <td>jobowonubi@gmail.com || 08100134741</td>
+                                        <td>{{ Auth::user()->email }} || {{ Auth::user()->contact->phone ?? '-' }}</td>
                                     </tr>
                                     <tr>
                                         <th>Address</th>
-                                        <td>UNILORIN</td>
+                                        <td>{{ Auth::user()->contact->address ?? '-' }}</td>
                                     </tr>
                                     <tr>
                                         <th>Member Since</th>
-                                        <td>Feb, 14 2021</td>
+                                        <td>{{ Auth::user()->created_at->diffForHumans() }}</td>
                                     </tr>
                                 </table>
                                 <span class="pull-right mr-4 mt-2" style="float: right;">
@@ -49,7 +49,6 @@
             <div class="card-body table-responsive">
                 <table class="table table-striped table-bordered" id="table1">
                     <thead>
-                        <th class="hidden"></th>
                         <th>Date</th>
                         <th>Transaction#</th>
                         <th>Amount</th>
@@ -57,25 +56,18 @@
                     </thead>
                     <tbody>
 
-                        <tr>
-                            <td class='hidden'></td>
-                            <td>Feb 13, 2021</td>
-                            <td>i9j30jmip</td>
-                            <td>&#36; 1,747.97</td>
-                            <td><button class='btn btn-sm btn-flat btn-info ' data-id='11'><i class='fa fa-search'></i>
-                                    View</button></td>
-                        </tr>
-                        <?php for ($i = 0; $i < 50; $i++) { ?> <tr>
-                            <td class='hidden'></td>
-                            <td>Feb 13, 2021</td>
-                            <td><?php echo Str::random(40); ?></td>
-                            <td>&#36; 0.00</td>
+
+                        @foreach ($transactions as $transaction)
+                            <td>{{ $transaction->created_at->diffForHumans() }}</td>
+                            <td>{{ $transaction->ref }}</td>
+                            <td>&#8358; {{ $transaction->amount }}</td>
                             <td><button class='btn btn-sm btn-flat btn-info ' data-id='12'><i class='fa fa-search'></i>
                                     View</button></td>
                             </tr>
-                            <?php } ?>
+                        @endforeach
                     </tbody>
                 </table>
+                {{ $transactions->links() }}
             </div>
         </div>
     </div>

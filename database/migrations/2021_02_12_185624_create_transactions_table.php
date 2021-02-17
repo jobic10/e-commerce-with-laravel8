@@ -15,7 +15,7 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('ref');
+            $table->string('ref')->unique();
             $table->float('amount');
             $table->timestamps();
             $table->softDeletes();

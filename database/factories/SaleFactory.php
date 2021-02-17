@@ -31,7 +31,8 @@ class SaleFactory extends Factory
         return [
             'transaction_id' => $transaction->id,
             'user_id' => $user->id,
-            'product_id' => $product->id
+            'product_id' => $product->id,
+            'quantity' => mt_rand(1, 4)
         ];
     }
 }

@@ -276,17 +276,35 @@ class PageController extends Controller
             if (array_key_exists('data', $result) && array_key_exists('status', $result['data']) && ($result['data']['status'] === 'success') && ($result['data']['requested_amount'] === intval($amount))) {
                 //confirm access to payment success page
                 $reference = strtoupper($reference);
-                //Insert into transaction
-                //Move cart to transaction
                 //User might not be online. Use the email of the payer and get the id
                 $payer_email = ($result['data']['customer']['email']);
                 $amount = $result['data']['requested_amount'] / 100;
                 $user = User::where('email', $payer_email)->firstOrFail();
-                $transaction = Transaction::create([
-                    'ref' => $reference,
-                    'user_id' => $user->id,
-                    'amount' => $amount
-                ]);
+
+                //To prevent using same reference, check to see if payment reference exists
+                $check_existing = Transaction::where('ref', $reference)->exists();
+                if ($check_existing)
+                    return redirect(route('viewProfile'))->with('status', [
+                        'title' => 'Payment already verified',
+                        'type' => 'error',
+                        'msg' => 'Payment reference already used!'
+                    ]);
+                //Insert into transaction
+                try {
+
+                    $transaction = Transaction::create([
+                        'ref' => $reference,
+                        'user_id' => $user->id,
+                        'amount' => $amount
+                    ]);
+                } catch (\Exception $e) {
+                    return redirect(route('viewProfile'))->with('status', [
+                        'title' => 'Duplicate Reference',
+                        'type' => 'error',
+                        'msg' => 'Payment reference already exist!'
+                    ]);
+                }
+                //Move cart to transaction
                 $carts = Cart::where('user_id', $user->id)->get();
                 foreach ($carts as $cart) {
                     Sale::create([
@@ -341,6 +359,8 @@ class PageController extends Controller
     }
     public function viewProfile()
     {
-        return view('customer.profile');
+        return view('customer.profile', [
+            'transactions' => Transaction::where('user_id', Auth::id())->paginate(10)
+        ]);
     }
 }
