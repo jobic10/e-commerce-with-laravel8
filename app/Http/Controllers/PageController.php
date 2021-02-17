@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use stdClass;
 
 class PageController extends Controller
 {
@@ -71,36 +72,20 @@ class PageController extends Controller
                 return response()->json([
                     'msg' => 'Product added to cart!',
                     'type' => 'success',
+                    'title' => '🛒'
                 ]);
             } else return response()->json([
                 'msg' => 'Product already in cart',
-                'type' => 'info'
+                'type' => 'info',
+                'title' => '🤓'
+
             ]);
         } else {
-            if (!Session::has('cart')) {
-                session('cart', array());
-            }
-            $exist = array();
-            if (session('cart'))
-                foreach (session('cart') as $row) {
-                    array_push($exist, $row['productid']);
-                }
-            if (in_array($product->id, $exist)) {
-                return response()->json([
-                    'msg' => 'Product already in cart!',
-                    'type' => 'info',
-                ]);
-            } else {
-                $data = array();
-                $data['productid'] = $product->id;
-                $data['quantity'] = $quantity;
-
-                $request->session()->push('cart', $data);
-                return response()->json([
-                    'msg' => 'Product added to cart!',
-                    'type' => 'success',
-                ]);
-            }
+            return response()->json([
+                'msg' => 'You need to be logged in!',
+                'type' => 'error',
+                'title' => 'Oops'
+            ]);
         }
     }
     public function getCart()
@@ -108,44 +93,24 @@ class PageController extends Controller
 
         $output = array('list' => '', 'count' => 0);
 
-        if (Auth::user()) {
-            $carts = Cart::where('user_id', Auth::id())->get();
-            foreach ($carts as $cart) {
-                $output['count']++;
-                $productname = (strlen($cart->product->name) > 30) ? substr_replace($cart->product->name, '...', 27) : $cart->product->name;
-                $output['list'] .= "
+        $carts = Cart::where('user_id', Auth::id())->get();
+        foreach ($carts as $cart) {
+            $output['count']++;
+            $productname = (strlen($cart->product->name) > 30) ? substr_replace($cart->product->name, '...', 27) : $cart->product->name;
+            $output['list'] .= "
                 <li class='dropdown-item'>
                                    " . $productname . " &times; " . $cart->quantity . "
                         </li>
                     ";
-            }
-        } else {
-            if (!Session::has('cart')) {
-                session('cart', array());
-            }
-
-            if (count(session('cart')) < 1) {
-                $output['count'] = 0;
-            } else {
-                foreach (session('cart') as $row) {
-                    $product = Product::find($row['productid']);
-                    if (!$product) continue;
-                    $output['count']++;
-
-                    $output['list'] .= "
-                        <li class='dropdown-item'>
-                                   " . $product->name . " &times; " . $row['quantity'] . "
-                        </li>
-                    ";
-                }
-            }
         }
-
         $output['list'] .= '<li class="dropdown-item"><a href="' . route('previewCart') . '">Go to Cart</a></li>';
         echo json_encode($output);
     }
     public function previewCart()
     {
-        return view('customer.cart_view');
+        $carts = Cart::where('user_id', Auth::id())->get();
+        return view('customer.cart_view', [
+            'carts' => $carts
+        ]);
     }
 }

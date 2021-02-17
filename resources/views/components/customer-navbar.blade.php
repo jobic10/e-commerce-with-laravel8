@@ -56,21 +56,21 @@
                     </ul>
                     <div class="navbar-custom-menu ">
                         <ul class="nav navbar-nav ">
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle  text-white" href="#" id="navbarDropdown"
-                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-shopping-cart   text-white"></i> <sup><span
-                                            class="badge badge-success count"></sup></span>
-                                </a>
-                                <ul id="cart_menu" class="dropdown-menu" style='background-color:white-smoke;'>
-                                    <li class="header ">You have <span class="cart_count"></span> in cart
-                                    </li>
-                                </ul>
-                            </li>
-
-
                             @if (Auth::user())
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle  text-white" href="#" id="navbarDropdown"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-shopping-cart   text-white"></i> <sup><span
+                                                class="badge badge-success count"></sup></span>
+                                    </a>
+                                    <ul id="cart_menu" class="dropdown-menu" style='background-color:white-smoke;'>
+                                        <li class="header ">You have <span class="cart_count"></span> in cart
+                                        </li>
+                                    </ul>
+                                </li>
+
+
                                 <li class="dropdown nav-link user user-menu">
                                     <a href="#" class="dropdown-toggle text-white" data-toggle="dropdown">
 

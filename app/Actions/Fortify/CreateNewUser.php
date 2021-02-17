@@ -52,7 +52,7 @@ class CreateNewUser implements CreatesNewUsers
         $contact->user_id = $user->id;
         $contact->save();
         $response = [
-            'title' => 'Welcome',
+            'title' => 'Welcome 🤝',
             'msg' => 'We are glad to have you on board!',
             'type' => 'success'
         ];

@@ -93,10 +93,8 @@
                     data: product,
                     dataType: 'json',
                     success: function(response) {
-                        swal(response.type.charAt(0).toUpperCase() + response.type.slice(1),
-                            response.msg, response.type);
+                        swal(response.title, response.msg, response.type);
                         // swal("Great", "No", 'success');
-
                         getCart();
                     }
                 });

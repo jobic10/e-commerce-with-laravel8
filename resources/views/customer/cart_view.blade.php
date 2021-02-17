@@ -19,32 +19,36 @@
                         </tr>
                     </thead>
                     <tbody id="tbody">
-                        <tr>
-                            <td><button type="button" data-id="5" class="btn btn-danger btn-sm cart_delete"><i
-                                        class="fa fa-trash fa-xs "></i></button></td>
-                            <td><img src="https://via.placeholder.com/30" width="20px" height="20px">
-                            </td>
-                            <td>MICROSOFT Surface Pro 4 &amp; Typecover - 128 GB</td>
-                            <td>$ 799.00</td>
+                        @foreach ($carts as $cart)
+                            <tr>
+                                <td><button type="button" data-id="{{ $cart->id }}"
+                                        class="btn btn-danger btn-sm cart_delete"><i
+                                            class="fa fa-trash fa-xs "></i></button></td>
+                                <td><img src="https://via.placeholder.com/30" width="20px" height="20px">
+                                </td>
+                                <td>{{ $cart->product->name }}</td>
+                                <td>&#8358; {{ number_format($cart->product->price) }}</td>
 
 
-                            <td>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
+                                <td>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
 
-                                        <button type="button" id="minus" class="btn btn-outline-primary btn-sm minus"
-                                            data-id="5"><i class="fa fa-minus fa-xs"></i></button>
+                                            <button type="button" id="minus" class="btn btn-outline-primary btn-sm minus"
+                                                data-id="{{ $cart->id }}"><i class="fa fa-minus fa-xs"></i></button>
+                                        </div>
+                                        <input type="text" value="{{ $cart->quantity }}" class="form-control"
+                                            placeholder="" aria-label="Example text with button addon"
+                                            aria-describedby="button-addon1">
+                                        <div class="input-group-append">
+                                            <button type="button" id="minus" class="btn btn-outline-primary btn-sm minus"
+                                                data-id="{{ $cart->id }}"><i class="fa fa-plus fa-xs"></i></button>
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control" placeholder=""
-                                        aria-label="Example text with button addon" aria-describedby="button-addon1">
-                                    <div class="input-group-append">
-                                        <button type="button" id="minus" class="btn btn-outline-primary btn-sm minus"
-                                            data-id="5"><i class="fa fa-plus fa-xs"></i></button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>$ 1,598.00</td>
-                        </tr>
+                                </td>
+                                <td>$ {{ number_format($cart->product->price * $cart->quantity) }}</td>
+                            </tr>
+                        @endforeach
 
                         <tr>
                             <td colspan="5" align="right"><b>Total</b></td>
