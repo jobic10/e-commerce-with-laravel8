@@ -22,3 +22,6 @@ Route::get('/search', [PageController::class, 'searchForProduct'])->name('search
 Route::post('/cart/add', [PageController::class, 'addToCart'])->name('addToCart');
 Route::get('/cart/fetch', [PageController::class, 'getCart'])->name('getCart');
 Route::get('/cart/preview', [PageController::class, 'previewCart'])->name('previewCart');
+Route::get('/cart/fetch', [PageController::class, 'fetchCart'])->name('fetchCart');
+Route::post('/cart/update', [PageController::class, 'updateCart'])->name('updateCart');
+Route::get('cart/total', [PageController::class, 'getCartTotal'])->name('getCartTotal');

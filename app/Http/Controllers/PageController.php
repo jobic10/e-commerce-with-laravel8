@@ -113,4 +113,84 @@ class PageController extends Controller
             'carts' => $carts
         ]);
     }
+    public function fetchCart()
+    {
+        $carts = Cart::where('user_id', Auth::id())->get();
+        $output = "";
+        $subtotal = 0;
+        $total = 0;
+        foreach ($carts as $cart) {
+            $subtotal = $cart->product->price * $cart->quantity;
+            $total += $subtotal;
+            $output .= '
+        <tr>
+            <td><button type="button" data-id="' . $cart->id . '"
+                    class="btn btn-danger btn-sm cart_delete"><i
+                        class="fa fa-trash fa-xs "></i></button></td>
+            <td><img src="https://via.placeholder.com/30" width="20px" height="20px">
+            </td>
+            <td>' . $cart->product->name . '</td>
+            <td>&#8358;' . number_format($cart->product->price) . '</td>
+
+
+            <td>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+
+                        <button type="button" id="minus" class="btn btn-outline-primary btn-sm minus"
+                            data-id="' . $cart->id . '"><i class="fa fa-minus fa-xs"></i></button>
+                    </div>
+                    <input type="text" id="qty_' . $cart->id . '" value="' . $cart->quantity . '" class="form-control" readonly>
+                    <div class="input-group-append">
+                        <button type="button" id="add" class="btn btn-outline-primary btn-sm add"
+                            data-id="' . $cart->id . '"><i class="fa fa-plus fa-xs"></i></button>
+                    </div>
+                </div>
+            </td>
+            <td>$ ' . number_format($subtotal) . '</td>
+        </tr>';
+        }
+
+        $output .= "
+        <tr>
+            <td colspan='5' align='right'><b>Total</b></td>
+            <td><b>&#36; " . number_format($total, 2) . "</b></td>
+        <tr>
+    ";
+
+        return response()->json($output);
+    }
+    public function updateCart(Request $request)
+    {
+
+        $id = $request->id;
+        $quantity = $request->qty;
+        $cart = Cart::findOrFail($id);
+        // echo $cart->product->name;
+        // dd($cart);
+        if ($cart->user_id != Auth::id() || !is_int($quantity)) {
+            $output = [
+                'title' => 'Access Denied',
+                'msg' => 'You do not have access to this resource',
+                'type' => 'error'
+            ];
+        }
+        $cart->quantity = $quantity;
+        $cart->save();
+        $output = [
+            'title' => 'Cart updated',
+            'msg' => 'Cart has been updated',
+            'type' => 'success'
+        ];
+        return response()->json($output);
+    }
+    public function getCartTotal()
+    {
+        $carts = Cart::where('user_id', Auth::id())->get();
+        $total = 0;
+        foreach ($carts as $cart) {
+            $total += ($cart->product->price * $cart->quantity);
+        }
+        return  response()->json(number_format($total));
+    }
 }

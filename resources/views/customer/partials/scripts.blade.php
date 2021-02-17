@@ -24,7 +24,7 @@
     function getCart() {
         $.ajax({
             type: 'GET',
-            url: '{{ route('getCart') }}',
+            url: '{{ route('fetchCart') }}',
             dataType: 'json',
             success: function(response) {
                 $('#cart_menu').html(response.list);

@@ -19,40 +19,10 @@
                         </tr>
                     </thead>
                     <tbody id="tbody">
-                        @foreach ($carts as $cart)
-                            <tr>
-                                <td><button type="button" data-id="{{ $cart->id }}"
-                                        class="btn btn-danger btn-sm cart_delete"><i
-                                            class="fa fa-trash fa-xs "></i></button></td>
-                                <td><img src="https://via.placeholder.com/30" width="20px" height="20px">
-                                </td>
-                                <td>{{ $cart->product->name }}</td>
-                                <td>&#8358; {{ number_format($cart->product->price) }}</td>
-
-
-                                <td>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-
-                                            <button type="button" id="minus" class="btn btn-outline-primary btn-sm minus"
-                                                data-id="{{ $cart->id }}"><i class="fa fa-minus fa-xs"></i></button>
-                                        </div>
-                                        <input type="text" value="{{ $cart->quantity }}" class="form-control"
-                                            placeholder="" aria-label="Example text with button addon"
-                                            aria-describedby="button-addon1">
-                                        <div class="input-group-append">
-                                            <button type="button" id="minus" class="btn btn-outline-primary btn-sm minus"
-                                                data-id="{{ $cart->id }}"><i class="fa fa-plus fa-xs"></i></button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>$ {{ number_format($cart->product->price * $cart->quantity) }}</td>
-                            </tr>
-                        @endforeach
 
                         <tr>
                             <td colspan="5" align="right"><b>Total</b></td>
-                            <td><b>$ 1,747.97</b></td>
+                            <td><b>&#8358; </b></td>
                         </tr>
                         <tr>
                         </tr>
@@ -68,5 +38,113 @@
             </div>
         </div>
     </div>
+
+@endsection
+
+@section('custom_js')
+    <script>
+        var total = 0;
+        $(function() {
+            $(document).on('click', '.cart_delete', function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                $.ajax({
+                    type: 'POST',
+                    url: 'cart_delete.php',
+                    data: {
+                        id: id
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (!response.error) {
+                            getDetails();
+                            getCart();
+                            getTotal();
+                        }
+                    }
+                });
+            });
+
+            $(document).on('click', '.minus', function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                var qty = $('#qty_' + id).val();
+                if (qty > 1) {
+                    qty--;
+                }
+                $('#qty_' + id).val(qty);
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('updateCart') }}',
+                    data: {
+                        id: id,
+                        qty: qty,
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+
+                        getDetails();
+                        getCart();
+                        getTotal();
+                        swal(response.title, response.msg, response.type);
+                    }
+                });
+            });
+
+            $(document).on('click', '.add', function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                var qty = $('#qty_' + id).val();
+                qty++;
+                $('#qty_' + id).val(qty);
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('updateCart') }}',
+                    data: {
+                        id: id,
+                        qty: qty,
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+
+                        getDetails();
+                        getCart();
+                        getTotal();
+                        swal(response.title, response.msg, response.type);
+                    }
+                });
+            });
+
+            getDetails();
+            getTotal();
+        });
+
+        function getDetails() {
+            $('#tbody').html(
+                "<tr><td colspan='6' class='text-center'><img class='img img-fluid' src='https://i.stack.imgur.com/FhHRx.gif'  height='150' width='150'></td></tr>"
+            );
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('fetchCart') }}',
+                dataType: 'json',
+                success: function(response) {
+                    $('#tbody').html(response);
+                    getCart();
+                }
+            });
+        }
+
+        function getTotal() {
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('getCartTotal') }}',
+                dataType: 'json',
+                success: function(response) {
+                    total = response;
+                }
+            });
+        }
+
+    </script>
 
 @endsection
