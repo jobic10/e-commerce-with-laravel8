@@ -97,14 +97,10 @@ class PageController extends Controller
         foreach ($carts as $cart) {
             $output['count']++;
             $productname = (strlen($cart->product->name) > 30) ? substr_replace($cart->product->name, '...', 27) : $cart->product->name;
-            $output['list'] .= "
-                <li class='dropdown-item'>
-                                   " . $productname . " &times; " . $cart->quantity . "
-                        </li>
-                    ";
+            $output['list'] .= "<li class='dropdown-item'>" . $productname . " &times; " . $cart->quantity . "</li>";
         }
         $output['list'] .= '<li class="dropdown-item"><a href="' . route('previewCart') . '">Go to Cart</a></li>';
-        echo json_encode($output);
+        return json_encode($output);
     }
     public function previewCart()
     {
@@ -192,5 +188,128 @@ class PageController extends Controller
             $total += ($cart->product->price * $cart->quantity);
         }
         return  response()->json(number_format($total));
+    }
+    public function initPayment()
+    {
+        $pay = curl_init();
+        $email = Auth::user()->email;
+        $json_amount = json_decode($this->getCartTotal()->getContent());
+        $json_amount = str_replace(",", "", $json_amount);
+        $amount = is_float($json_amount) ? floatval($json_amount) : intval($json_amount);
+        $amount *= 100; //amount in kobo
+        $paystack = env('PAYSTACK_KEY', 'PAYSTACK');
+        // dd($amount * 100);
+        // dd($amount);
+        //the amount in kobo. This value is actually NGN 5000
+        curl_setopt_array($pay, array(
+            CURLOPT_URL => "https://api.paystack.co/transaction/initialize",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_CUSTOMREQUEST => "POST",
+
+            CURLOPT_POSTFIELDS => json_encode([
+                'amount' => $amount,
+                'email' => $email,
+            ]),
+            CURLOPT_HTTPHEADER => [
+                "authorization: Bearer $paystack", //replace this with your own test key
+                "content-type: application/json",
+                "cache-control: no-cache"
+            ],
+        ));
+        $response = curl_exec($pay);
+        $err = curl_error($pay);
+        if ($err) {
+            return redirect(route('previewCart'))->with('status', [
+                'title' => 'Payment Error',
+                'type' => 'warning',
+                'msg' => 'We are deeply sorry. Please try making payment again!'
+            ]);
+        }
+        $tranx = json_decode($response);
+        if (!$tranx->status or empty($tranx->status)) {
+            // there was an error from the API
+            return redirect(route('previewCart'))->with('status', [
+                'title' => 'Payment Error',
+                'type' => 'warning',
+                'msg' => 'Payment server error!'
+            ]);
+        }
+        return redirect($tranx->data->authorization_url);
+    }
+    public function verifyPayment(Request $request)
+    {
+        $reference = $request->reference;
+        echo $reference;
+        $pay = curl_init();
+        $json_amount = json_decode($this->getCartTotal()->getContent());
+        $json_amount = str_replace(",", "", $json_amount);
+        $amount = is_float($json_amount) ? floatval($json_amount) : intval($json_amount);
+        $amount *= 100; //amount in kobo
+        $paystack = env('PAYSTACK_KEY', 'PAYSTACK');
+
+        curl_setopt_array($pay, array(
+            CURLOPT_URL => "https://api.paystack.co/transaction/verify/" . rawurlencode($reference),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_HTTPHEADER => [
+                "accept: application/json",
+                "authorization: Bearer $paystack",
+                "cache-control: no-cache"
+            ],
+        ));
+        $response = curl_exec($pay);
+        $err = curl_error($pay);
+        if ($err) {
+            return redirect(route('previewCart'))->with('status', [
+                'title' => 'Payment Error',
+                'type' => 'warning',
+                'msg' => 'We are deeply sorry. Please try making payment again!'
+            ]);
+        }
+        if ($response) {
+            $result = json_decode($response, true);
+
+            if (array_key_exists('data', $result) && array_key_exists('status', $result['data']) && ($result['data']['status'] === 'success') && ($result['data']['requested_amount'] === intval($amount))) {
+                //confirm access to payment success page
+                $reference = strtoupper($reference);
+                //Insert into transaction
+                //Move cart to transaction
+            } else {
+                return redirect(route('previewCart'))->with('status', [
+                    'title' => 'Payment not valid',
+                    'type' => 'warning',
+                    'msg' => 'Amount paid is not sufficient!'
+                ]);
+            }
+        }
+        return redirect(route('previewCart'))->with('status', [
+            'title' => 'Payment Error',
+            'type' => 'warning',
+            'msg' => 'We are deeply sorry. Please try making payment again!'
+        ]);
+        dd($request);
+    }
+    public function deleteCart(Request $request)
+    {
+        $id = $request->id;
+        $cart = Cart::find($id);
+        if (!$cart) return [
+            'title' => 'Access Denied',
+            'type' => 'error',
+            'msg' => 'You are not allowed to do this!'
+        ];
+        if ($cart->user_id != Auth::id())
+            return [
+                'title' => 'Access Denied',
+                'type' => 'error',
+                'msg' => 'You do not have access to this resource!'
+            ];
+        $cart->delete();
+        return [
+            'title' => 'Action Completed',
+            'type' => 'success',
+            'msg' => 'Product has been removed from cart'
+        ];
     }
 }

@@ -30,11 +30,8 @@
                 </table>
             </div>
             <div class="card-footer">
-                @if (Auth::user())
-                    <a href="#" class="btn btn-primary">Make Payment</a>
-                @else
-                    <a href="{{ route('login') }}" class="btn btn-primary">Login To Proceed</a>
-                @endif
+                <a href="{{ route('initPayment') }}" class="btn btn-primary">Make Payment</a>
+
             </div>
         </div>
     </div>
@@ -49,18 +46,17 @@
                 e.preventDefault();
                 var id = $(this).data('id');
                 $.ajax({
-                    type: 'POST',
-                    url: 'cart_delete.php',
+                    type: 'DELETE',
+                    url: '{{ route('deleteCart') }}',
                     data: {
                         id: id
                     },
                     dataType: 'json',
                     success: function(response) {
-                        if (!response.error) {
-                            getDetails();
-                            getCart();
-                            getTotal();
-                        }
+                        getDetails();
+                        getCart();
+                        getTotal();
+                        swal(response.title, response.msg, response.type);
                     }
                 });
             });
