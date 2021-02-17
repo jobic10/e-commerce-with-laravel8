@@ -96,14 +96,13 @@
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <a href="#loginModal" role="button" class="nav-link text-white" data-toggle="modal">
+                                    <a href="{{ route('login') }}" role="button" class="nav-link text-white">
                                         Login
                                     </a>
                                 </li>
                                 @if (Route::has('register'))
                                     <li class="nav-item">
-                                        <a href="#registerModal" role="button" class="nav-link text-white"
-                                            data-toggle="modal">
+                                        <a href="{{ route('register') }}" role="button" class="nav-link text-white">
                                             Register
                                         </a>
                                     </li>
