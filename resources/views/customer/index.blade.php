@@ -9,13 +9,16 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="https://picsum.photos/1559/510" class="d-block w-100" alt="First slide">
+                    <img src="https://picsum.photos/1559/510" height="310" width="1559" class="d-block w-100"
+                        alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://via.placeholder.com/1559x510" class="d-block w-100" alt="Second slide">
+                    <img src="https://via.placeholder.com/1559x510" height="310" width="1559" class="d-block w-100"
+                        alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://picsum.photos/1559/510" class="d-block w-100" alt="Third slide">
+                    <img src="https://picsum.photos/1559/510" height="310" width="1559" class="d-block w-100"
+                        alt="Third slide">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carousel-example-generic" role="button" data-slide="prev">
