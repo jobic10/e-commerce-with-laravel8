@@ -22,9 +22,8 @@ class TransactionFactory extends Factory
      */
     public function definition()
     {
-        $sale = Sale::inRandomOrder()->first();
         return [
-            'ref' => $sale->ref,
+            'ref' => uniqid(),
             'amount' => $this->faker->numberBetween(500, 30000),
         ];
     }
