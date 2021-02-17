@@ -1,13 +1,12 @@
 @extends('customer.main')
 @section('content')
     <div class="col-sm-9">
-        <div class="font-weight-bold mb-3">
 
-            Your Cart
-        </div>
         <div class="card">
-
-            <div class="card table-responsive">
+            <div class="card-header font-weight-bold mb-3">
+                Your Cart
+            </div>
+            <div class="card-body table-responsive">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -56,13 +55,14 @@
                     </tbody>
                 </table>
             </div>
+            <div class="card-footer">
+                @if (Auth::user())
+                    <a href="#" class="btn btn-primary">Make Payment</a>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-primary">Login To Proceed</a>
+                @endif
+            </div>
         </div>
-        <?php if (isset($_SESSION['user'])) {
-        echo 'Checkout with paystack';
-        } else {
-        echo '
-        <span>You need to <a href="#loginModal" data-toggle="modal">login</a> to proceed.</span>';
-        } ?>
     </div>
 
 @endsection

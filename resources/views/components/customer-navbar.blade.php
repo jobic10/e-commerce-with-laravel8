@@ -66,7 +66,6 @@
                                 <ul id="cart_menu" class="dropdown-menu" style='background-color:white-smoke;'>
                                     <li class="header ">You have <span class="cart_count"></span> in cart
                                     </li>
-                                    <a href="cart_view.php">Go to Cart</a>
                                 </ul>
                             </li>
 

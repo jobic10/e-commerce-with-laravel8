@@ -141,7 +141,11 @@ class PageController extends Controller
             }
         }
 
-        $output['list'] .= '<a href="cart_view.php">Go to Cart</a>';
+        $output['list'] .= '<li class="dropdown-item"><a href="' . route('previewCart') . '">Go to Cart</a></li>';
         echo json_encode($output);
+    }
+    public function previewCart()
+    {
+        return view('customer.cart_view');
     }
 }
