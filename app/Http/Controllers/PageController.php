@@ -198,13 +198,6 @@ class PageController extends Controller
                             <td>$ ' . number_format($subtotal) . '</td>
                             </tr>';
             }
-
-            $output .= "
-                        <tr>
-                        <td colspan='5' align='right'><b>Total</b></td>
-                        <td><b>&#36; " . number_format($total, 2) . "</b></td>
-                        <tr>
-                        ";
         } else {
             //Fetch from session
             if (!Session::has('cart')) {
@@ -248,6 +241,12 @@ class PageController extends Controller
                                 </tr>';
             }
         }
+        $output .= "
+        <tr>
+        <td colspan='5' align='right'><b>Total</b></td>
+        <td><b>&#36; " . number_format($total, 2) . "</b></td>
+        <tr>
+        ";
         return response()->json($output);
     }
     public function updateCart(Request $request)
@@ -285,14 +284,22 @@ class PageController extends Controller
     }
     public function getCartTotal()
     {
+        $total = 0;
         if (Auth::user()) {
             $carts = Cart::where('user_id', Auth::id())->get();
-            $total = 0;
             foreach ($carts as $cart) {
                 $total += ($cart->product->price * $cart->quantity);
             }
         } else {
-            //IcsTcsCatLab2021VirtualLR30
+            $carts = session('cart', []);
+            foreach ($carts as $key => $cart) {
+                $product = Product::find($cart['product_id']);
+                if (!$product) {
+                    Session::forget("cart.$key");
+                    continue;
+                }
+                $total += ($product->price * $cart['quantity']);
+            }
         }
         return  response()->json(number_format($total));
     }
@@ -443,24 +450,28 @@ class PageController extends Controller
     public function deleteCart(Request $request)
     {
         $id = $request->id;
-        $cart = Cart::find($id);
-        if (!$cart) return [
-            'title' => 'Access Denied',
-            'type' => 'error',
-            'msg' => 'You are not allowed to do this!'
-        ];
-        if ($cart->user_id != Auth::id())
-            return [
+        if (Auth::user()) {
+            $cart = Cart::find($id);
+            if (!$cart) return [
                 'title' => 'Access Denied',
                 'type' => 'error',
-                'msg' => 'You do not have access to this resource!'
+                'msg' => 'You are not allowed to do this!'
             ];
-        $cart->delete();
-        return [
-            'title' => 'Action Completed',
-            'type' => 'success',
-            'msg' => 'Product has been removed from cart'
-        ];
+            if ($cart->user_id != Auth::id())
+                return [
+                    'title' => 'Access Denied',
+                    'type' => 'error',
+                    'msg' => 'You do not have access to this resource!'
+                ];
+            $cart->delete();
+            return [
+                'title' => 'Action Completed',
+                'type' => 'success',
+                'msg' => 'Product has been removed from cart'
+            ];
+        } else {
+            //Delete from session cart
+        }
     }
     public function viewProfile()
     {
