@@ -60,7 +60,7 @@
                         getDetails();
                         getCart();
                         getTotal();
-                        // swal(response.title, response.msg, response.type);
+                        swal(response.title, response.msg, response.type);
                     }
                 });
             });

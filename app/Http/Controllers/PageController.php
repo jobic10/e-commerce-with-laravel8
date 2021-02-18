@@ -471,6 +471,12 @@ class PageController extends Controller
             ];
         } else {
             //Delete from session cart
+            Session::forget("cart.$id");
+            return [
+                'title' => 'Action Completed',
+                'type' => 'success',
+                'msg' => 'Product has been removed from cart'
+            ];
         }
     }
     public function viewProfile()
