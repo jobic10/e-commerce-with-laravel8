@@ -30,7 +30,11 @@
                 </table>
             </div>
             <div class="card-footer">
-                <a href="{{ route('initPayment') }}" class="btn btn-primary">Make Payment</a>
+                @if (Auth::user())
+                    <a href="{{ route('initPayment') }}" class="btn btn-primary">Make Payment</a>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-primary">Login To Proceed</a>
+                @endif
 
             </div>
         </div>
@@ -56,7 +60,7 @@
                         getDetails();
                         getCart();
                         getTotal();
-                        swal(response.title, response.msg, response.type);
+                        // swal(response.title, response.msg, response.type);
                     }
                 });
             });
@@ -85,7 +89,7 @@
                         getDetails();
                         getCart();
                         getTotal();
-                        swal(response.title, response.msg, response.type);
+                        // swal(response.title, response.msg, response.type);
                     }
                 });
             });
@@ -109,7 +113,7 @@
                         getDetails();
                         getCart();
                         getTotal();
-                        swal(response.title, response.msg, response.type);
+                        // swal(response.title, response.msg, response.type);
                     }
                 });
             });
