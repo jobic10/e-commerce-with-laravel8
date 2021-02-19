@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Customer\PaymentController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,7 @@ Route::get('/cart/preview', [PageController::class, 'previewCart'])->name('previ
 Route::get('/cart/fetch', [PageController::class, 'fetchCart'])->name('fetchCart');
 Route::post('/cart/update', [PageController::class, 'updateCart'])->name('updateCart');
 Route::get('cart/total', [PageController::class, 'getCartTotal'])->name('getCartTotal');
-Route::get('cart/payment', [PageController::class, 'initPayment'])->name('initPayment');
-Route::get('cart/verify-payment', [PageController::class, 'verifyPayment'])->name('verifyPayment');
+Route::get('cart/payment', [PaymentController::class, 'initPayment'])->name('initPayment');
+Route::get('cart/verify-payment', [PaymentController::class, 'verifyPayment'])->name('verifyPayment');
 Route::delete('cart/delete', [PageController::class, 'deleteCart'])->name('deleteCart');
 Route::get('profile/', [PageController::class, 'viewProfile'])->name('viewProfile');

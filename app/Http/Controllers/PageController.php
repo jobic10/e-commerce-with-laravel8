@@ -282,7 +282,7 @@ class PageController extends Controller
         // return response()->json($output);
         return response()->json(true);
     }
-    public function getCartTotal()
+    public static function getCartTotal()
     {
         $total = 0;
         if (Auth::user()) {

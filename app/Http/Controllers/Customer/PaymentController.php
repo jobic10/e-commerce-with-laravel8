@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PageController;
 use App\Models\Cart;
 use App\Models\Sale;
 use App\Models\Transaction;
@@ -10,13 +11,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class PaymentController extends Controller
 {
     public function initPayment()
     {
         $pay = curl_init();
         $email = Auth::user()->email;
-        $json_amount = json_decode($this->getCartTotal()->getContent());
+        $json_amount = json_decode(PageController::getCartTotal()->getContent());
         $json_amount = str_replace(",", "", $json_amount);
         $amount = is_float($json_amount) ? floatval($json_amount) : intval($json_amount);
         $amount *= 100; //amount in kobo
